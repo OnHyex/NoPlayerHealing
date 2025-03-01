@@ -1,7 +1,6 @@
-﻿using HarmonyLib;
-using UnityEngine;
+﻿using System;
 
-namespace No_Player_Healing
+namespace NoPlayerHealing
 {
     [HarmonyPatch(typeof(PLPlayer), "Update")]
     internal class Player
@@ -17,6 +16,7 @@ namespace No_Player_Healing
             if (__instance == PLNetworkManager.Instance.LocalPlayer)
             {
                 if (__instance.GetClassID() < 0) return; //fixes ArgumentOutOfRangeException before player selects class
+                if (!NoPlayerHealing.GUI.Active.Value) return;
                 PLPawn pawn = __instance.GetPawn();
                 if (pawn == null) //Pawn is deleted when player is dead, then a new pawn is created when player respawns
                 {

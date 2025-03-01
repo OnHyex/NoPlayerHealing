@@ -1,30 +1,17 @@
-﻿using static UnityEngine.GUILayout;
-using PulsarModLoader.CustomGUI;
-using System;
+﻿using System;
 
-namespace No_Player_Healing
+namespace NoPlayerHealing
 {
     internal class GUI : ModSettingsMenu
     {
+        public static SaveValue<bool> Active = new SaveValue<bool>("Active", true);
         public override string Name()
         {
-            return Mod.Instance.Name;
+            return "NoPlayerHealing";
         }
-
         public override void Draw()
         {
-            bool modOn = Toggle(Mod.Instance.IsEnabled(), "Mod Active");
-            if (modOn != Mod.Instance.IsEnabled())
-            {
-                if (modOn)
-                {
-                    Mod.Instance.Enable();
-                }
-                else
-                {
-                    Mod.Instance.Disable();
-                }
-            }
+            Active.Value = GUILayout.Toggle(Active.Value, "Enabled", Array.Empty<GUILayoutOption>());
         }
     }
 }

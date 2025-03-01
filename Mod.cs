@@ -1,7 +1,14 @@
-﻿using PulsarModLoader;
-using static PLBurrowArena;
+﻿using HarmonyLib;
+using PulsarModLoader;
+using PulsarModLoader.CustomGUI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UnityEngine;
 
-namespace No_Player_Healing
+namespace NoPlayerHealing
 {
     public class Mod : PulsarMod
     {
@@ -20,17 +27,15 @@ namespace No_Player_Healing
 
         public override string Version => "0.0.3";
 
-        public override string Author => "18107";
+        public override string Author => "OnHyex";
 
         public override string ShortDescription => "Prevents the player from healing";
 
         public override string Name => "No Player Healing";
 
-        public override string ModID => "noplayerhealing";
-
         public override string HarmonyIdentifier()
         {
-            return "id107.noplayerhealing";
+            return $"{Author}.{Name}";
         }
     }
 }
