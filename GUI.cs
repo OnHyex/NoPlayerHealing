@@ -1,4 +1,7 @@
 ﻿using System;
+using PulsarModLoader.CustomGUI;
+using PulsarModLoader;
+using UnityEngine;
 
 namespace NoPlayerHealing
 {
