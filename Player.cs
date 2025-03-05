@@ -18,8 +18,12 @@ namespace NoPlayerHealing
             if (__instance == PLNetworkManager.Instance.LocalPlayer)
             {
                 if (__instance.GetClassID() < 0) return; //fixes ArgumentOutOfRangeException before player selects class
-                if (!NoPlayerHealing.GUI.Active.Value) return;
                 PLPawn pawn = __instance.GetPawn();
+                if (!NoPlayerHealing.GUI.Active.Value)
+                {
+                    currentPlayerHealth = pawn.Health;
+                    return;
+                }
                 if (pawn == null) //Pawn is deleted when player is dead, then a new pawn is created when player respawns
                 {
                     wasDead = true;
