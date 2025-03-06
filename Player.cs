@@ -18,13 +18,18 @@ namespace NoPlayerHealing
             if (__instance == PLNetworkManager.Instance.LocalPlayer)
             {
                 if (__instance.GetClassID() < 0) return; //fixes ArgumentOutOfRangeException before player selects class
+                if (PLNetworkManager.Instance.MyLocalPawn == null || PLNetworkManager.Instance.MyLocalPawn.IsDead)
+                {
+                    wasDead = true;
+                    return;
+                }
                 PLPawn pawn = __instance.GetPawn();
                 if (!NoPlayerHealing.GUI.Active.Value)
                 {
                     currentPlayerHealth = pawn.Health;
                     return;
                 }
-                if (pawn == null) //Pawn is deleted when player is dead, then a new pawn is created when player respawns
+                if (pawn == null || pawn.IsDead) //Pawn is deleted when player is dead, then a new pawn is created when player respawns
                 {
                     wasDead = true;
                     return;
@@ -47,7 +52,7 @@ namespace NoPlayerHealing
                 else if (counter > survivalBonusCounter)
                 {
                     currentPlayerHealth += (counter - survivalBonusCounter) * 5;
-                    if (pawn.Health > 0 && Mod.Instance.IsEnabled())
+                    if (pawn.Health > 0)
                     {
                         pawn.Health += (counter - survivalBonusCounter) * 5;
                     }
@@ -66,7 +71,7 @@ namespace NoPlayerHealing
                     {
                         currentPlayerHealth = pawn.Health;
                     }
-                    else if (pawn.Health > currentPlayerHealth && Mod.Instance.IsEnabled())
+                    else if (pawn.Health > currentPlayerHealth)
                     {
                         pawn.Health = currentPlayerHealth;
                     }
@@ -86,7 +91,7 @@ namespace NoPlayerHealing
                 else if (boost > healthBoost)
                 {
                     currentPlayerHealth += (boost - healthBoost) * 20;
-                    if (pawn.Health > 0 && Mod.Instance.IsEnabled())
+                    if (pawn.Health > 0)
                     {
                         pawn.Health += (boost - healthBoost) * 20;
                     }
