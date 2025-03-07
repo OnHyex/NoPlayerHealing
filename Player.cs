@@ -29,12 +29,6 @@ namespace NoPlayerHealing
                     currentPlayerHealth = pawn.Health;
                     return;
                 }
-                /*if (pawn == null || pawn.IsDead) //Pawn is deleted when player is dead, then a new pawn is created when player respawns
-                {
-                    wasDead = true;
-                    return;
-                }*/
-
                 //Allow health reset when player respawns or is revived
                 if (wasDead && !pawn.IsDead)
                 {
