@@ -1,12 +1,4 @@
-﻿using HarmonyLib;
-using PulsarModLoader;
-using PulsarModLoader.CustomGUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using PulsarModLoader;
 
 namespace NoPlayerHealing
 {
