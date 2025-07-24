@@ -1,8 +1,9 @@
 ﻿using PulsarModLoader;
+using PulsarModLoader.Keybinds;
 
 namespace NoPlayerHealing
 {
-    public class Mod : PulsarMod
+    public class Mod : PulsarMod, IKeybind
     {
         public static Mod Instance { get; private set; }
 
@@ -11,13 +12,7 @@ namespace NoPlayerHealing
             Instance = this;
         }
 
-        public override void Enable()
-        {
-            Player.currentPlayerHealth = PLNetworkManager.Instance.MyLocalPawn.Health;
-            base.Enable();
-        }
-
-        public override string Version => "0.0.3";
+        public override string Version => "1.0.0";
 
         public override string Author => "OnHyex";
 
@@ -28,6 +23,10 @@ namespace NoPlayerHealing
         public override string HarmonyIdentifier()
         {
             return $"{Author}.{Name}";
+        }
+        public void RegisterBinds(KeybindManager manager)
+        {
+            manager.NewBind("No Player Healing", "NoPlayerHealing", "Basics", "p");
         }
     }
 }
