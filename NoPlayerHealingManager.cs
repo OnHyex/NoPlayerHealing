@@ -50,6 +50,7 @@ namespace NoPlayerHealing
                 if (ModeSwitchCheck)
                 {
                     currentPlayerHealth = Mathf.Min(pawn.Health, pawn.MaxHealth);
+                    StoredMaxHealth = pawn.MaxHealth;
                 }
             }
             if (GUI.Active)
@@ -60,9 +61,9 @@ namespace NoPlayerHealing
                 }
                 if (pawn.MaxHealth != StoredMaxHealth)
                 {
-                    Debug.Log($"{pawn.Health}, {StoredMaxHealth}, {pawn.MaxHealth - StoredMaxHealth}");
-                    currentPlayerHealth += pawn.MaxHealth - StoredMaxHealth;
-                    pawn.Health += currentPlayerHealth;
+                    //Debug.Log($"{pawn.Health}, {StoredMaxHealth}, {pawn.MaxHealth - StoredMaxHealth}");
+                    currentPlayerHealth = Mathf.Max(0.01f, (currentPlayerHealth + (pawn.MaxHealth - StoredMaxHealth)));
+                    pawn.Health = currentPlayerHealth;
                     StoredMaxHealth = pawn.MaxHealth;
                 }
                 if (wasDead && !pawn.IsDead)
